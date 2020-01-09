@@ -8,7 +8,7 @@
 # package is currently clashing in koji, so don't bother.
 %global debug_package %{nil}
 
-%define pkgrelease 6.14
+%define pkgrelease 6.15
 
 Name:    gpxe
 Version: 0.9.7
@@ -64,6 +64,8 @@ Patch19: gpxe-Extract-timing-parameters-out-to-config-dhcp.h.patch
 Patch20: gpxe-Use-spec-compliant-timeouts.patch
 # For bz#1206042 - Connection time out when install vm through network
 Patch21: gpxe-Fix-timeouts.patch
+# For bz#1231931 - gPXE 'Host' header being transferred without port
+Patch22: gpxe-Include-port-in-HTTP-Host-header-as-needed.patch
 
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -143,6 +145,7 @@ DNS, HTTP, iSCSI, etc.
 %patch19 -p1
 %patch20 -p1
 %patch21 -p1
+%patch22 -p1
 cp -a %{SOURCE1} .
 
 %build
@@ -212,6 +215,11 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Mon Dec 07 2015 Jeff E. Nelson <jen@redhat.com> - 0.9.7-6.15.el6
+- gpxe-Include-port-in-HTTP-Host-header-as-needed.patch [bz#1231931]
+- Resolves: bz#1231931
+  (gPXE 'Host' header being transferred without port)
+
 * Thu Apr 02 2015 Miroslav Rezanina <mrezanin@redhat.com> - 0.9.7-6.14.el6
 - gpxe-Fix-timeouts.patch [bz#1206042]
 - Resolves: bz#1206042
