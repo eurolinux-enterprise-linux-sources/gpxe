@@ -1,18 +1,20 @@
-From 1711c60f447f3fb7842c698af4db18d32e51a53e Mon Sep 17 00:00:00 2001
-Message-Id: <1711c60f447f3fb7842c698af4db18d32e51a53e.1483630900.git.ymankad@redhat.com>
+From 995f67fcea898c684a4396c377e8f38844122167 Mon Sep 17 00:00:00 2001
+Message-Id: <995f67fcea898c684a4396c377e8f38844122167.1477594769.git.ymankad@redhat.com>
 From: Ladi Prosek <lprosek@redhat.com>
-Date: Mon, 2 Jan 2017 15:18:10 -0500
+Date: Mon, 3 Oct 2016 16:11:55 -0400
 Subject: [CHANGE 1/2] netdevice: Strip 802.1Q VLAN 0 priority tags
-To: ymankad@redhat.com
+To: rhvirt-patches@redhat.com,
+    ymankad@redhat.com
 
 RH-Author: Ladi Prosek <lprosek@redhat.com>
-Message-id: <1483370290-19626-2-git-send-email-lprosek@redhat.com>
-Patchwork-id: 73156
-O-Subject: [RHEL-6.8.z gpxe PATCH 1/1] netdevice: Strip 802.1Q VLAN 0 priority tags
-Bugzilla: 1408391
-RH-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+Message-id: <1475511115-13114-1-git-send-email-lprosek@redhat.com>
+Patchwork-id: 72456
+O-Subject: [RHEL6.9 gpxe PATCH] netdevice: Strip 802.1Q VLAN 0 priority tags
+Bugzilla: 1354521
 RH-Acked-by: Laszlo Ersek <lersek@redhat.com>
 RH-Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
+RH-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
+RH-Acked-by: Xiao Wang <jasowang@redhat.com>
 
 gPXE was unable to receive priority tagged packets specified in
 the 802.1Q standard and supported by all major networking stacks.
@@ -33,6 +35,9 @@ Differences compared to the iPXE patch:
   vlan_find because gPXE does not have VLAN support
 * the new code in efi_snp.c uses RC_TO_EFIRC while iPXE converts
   the return code at the end of the function
+
+Bugzilla: https://bugzilla.redhat.com/show_bug.cgi?id=1354521
+Brew: https://brewweb.engineering.redhat.com/brew/taskinfo?taskID=11842220
 
 Signed-off-by: Ladi Prosek <lprosek@redhat.com>
 Signed-off-by: Yash Mankad <ymankad@redhat.com>

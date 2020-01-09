@@ -1,20 +1,21 @@
-From 757ebbe8804dd4083558f3bbd8a8ec8e732c0ec9 Mon Sep 17 00:00:00 2001
-Message-Id: <757ebbe8804dd4083558f3bbd8a8ec8e732c0ec9.1483630900.git.ymankad@redhat.com>
-In-Reply-To: <1711c60f447f3fb7842c698af4db18d32e51a53e.1483630900.git.ymankad@redhat.com>
-References: <1711c60f447f3fb7842c698af4db18d32e51a53e.1483630900.git.ymankad@redhat.com>
+From 1cc25fe9a67bf64c4aac08b7aee79274df1b0e31 Mon Sep 17 00:00:00 2001
+Message-Id: <1cc25fe9a67bf64c4aac08b7aee79274df1b0e31.1477594769.git.ymankad@redhat.com>
+In-Reply-To: <995f67fcea898c684a4396c377e8f38844122167.1477594769.git.ymankad@redhat.com>
+References: <995f67fcea898c684a4396c377e8f38844122167.1477594769.git.ymankad@redhat.com>
 From: Ladi Prosek <lprosek@redhat.com>
-Date: Mon, 2 Jan 2017 15:49:45 -0500
+Date: Tue, 4 Oct 2016 14:45:10 -0400
 Subject: [CHANGE 2/2] Fix fragment reassembly
-To: ymankad@redhat.com
+To: rhvirt-patches@redhat.com,
+    ymankad@redhat.com
 
 RH-Author: Ladi Prosek <lprosek@redhat.com>
-Message-id: <1483372185-21161-2-git-send-email-lprosek@redhat.com>
-Patchwork-id: 73158
-O-Subject: [RHEL-6.8.z gpxe PATCH 1/1] [ipv4] Fix fragment reassembly
-Bugzilla: 1408390
-RH-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
-RH-Acked-by: Laszlo Ersek <lersek@redhat.com>
+Message-id: <1475592310-8705-1-git-send-email-lprosek@redhat.com>
+Patchwork-id: 72469
+O-Subject: [RHEL6.9 gpxe PATCH] [ipv4] Fix fragment reassembly
+Bugzilla: 1380215
 RH-Acked-by: Stefan Hajnoczi <stefanha@redhat.com>
+RH-Acked-by: Laszlo Ersek <lersek@redhat.com>
+RH-Acked-by: Gerd Hoffmann <kraxel@redhat.com>
 
 From: Michael Brown <mcb30@ipxe.org>
 
@@ -49,6 +50,9 @@ Conflicts:
     initialized manually by assigning the expired field
   * a few manual fixups where git gave up because the context
     was different
+
+Bugzilla: https://bugzilla.redhat.com/show_bug.cgi?id=1380215
+Brew: https://brewweb.engineering.redhat.com/brew/taskinfo?taskID=11857054
 
 Signed-off-by: Ladi Prosek <lprosek@redhat.com>
 Signed-off-by: Yash Mankad <ymankad@redhat.com>
