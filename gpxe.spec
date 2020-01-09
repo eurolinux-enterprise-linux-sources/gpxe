@@ -8,7 +8,7 @@
 # package is currently clashing in koji, so don't bother.
 %global debug_package %{nil}
 
-%define pkgrelease 6.12
+%define pkgrelease 6.14
 
 Name:    gpxe
 Version: 0.9.7
@@ -56,6 +56,14 @@ Patch15: gpxe-Allow-prefix-to-specify-a-PCI-autoboot-device-location.patch
 Patch16: gpxe-Store-boot-bus-dev.fn-address-as-autoboot-device-locat.patch
 # For bz#1057249 - NIC boot order use device PCI address order instead of device boot order
 Patch17: gpxe-Ignore-PCI-autoboot-device-location-if-set-to-00-00.0.patch
+# For bz#968474 - [RFE] option to increase gpxe retry timeout
+Patch18: gpxe-Add-support-for-local-configuration-files.patch
+# For bz#968474 - [RFE] option to increase gpxe retry timeout
+Patch19: gpxe-Extract-timing-parameters-out-to-config-dhcp.h.patch
+# For bz#968474 - [RFE] option to increase gpxe retry timeout
+Patch20: gpxe-Use-spec-compliant-timeouts.patch
+# For bz#1206042 - Connection time out when install vm through network
+Patch21: gpxe-Fix-timeouts.patch
 
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -131,6 +139,10 @@ DNS, HTTP, iSCSI, etc.
 %patch15 -p1
 %patch16 -p1
 %patch17 -p1
+%patch18 -p1
+%patch19 -p1
+%patch20 -p1
+%patch21 -p1
 cp -a %{SOURCE1} .
 
 %build
@@ -200,6 +212,18 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Apr 02 2015 Miroslav Rezanina <mrezanin@redhat.com> - 0.9.7-6.14.el6
+- gpxe-Fix-timeouts.patch [bz#1206042]
+- Resolves: bz#1206042
+  (Connection time out when install vm through network)
+
+* Thu Feb 26 2015 Jeff E. Nelson <jen@redhat.com> - 0.9.7-6.13.el6
+- gpxe-Add-support-for-local-configuration-files.patch [bz#968474]
+- gpxe-Extract-timing-parameters-out-to-config-dhcp.h.patch [bz#968474]
+- gpxe-Use-spec-compliant-timeouts.patch [bz#968474]
+- Resolves: bz#968474
+  ([RFE] option to increase gpxe retry timeout)
+
 * Fri Aug 01 2014 Jeff E. Nelson <jenelson@redhat.com> - gpxe-0.9.7-6.12.el6
 - gpxe-Add-init_pci_busdevfn.patch [bz#1057249]
 - gpxe-Enable-infrastructure-to-specify-an-autoboot-device-lo.patch [bz#1057249]
