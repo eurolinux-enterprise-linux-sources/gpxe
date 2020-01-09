@@ -9,10 +9,11 @@
 %global debug_package %{nil}
 
 %define pkgrelease 6.15
+%define zrelease 1
 
 Name:    gpxe
 Version: 0.9.7
-Release: %{pkgrelease}%{?dist}
+Release: %{pkgrelease}%{?dist}.%{zrelease}
 Summary: A network boot loader
 
 Group:   System Environment/Base
@@ -66,6 +67,10 @@ Patch20: gpxe-Use-spec-compliant-timeouts.patch
 Patch21: gpxe-Fix-timeouts.patch
 # For bz#1231931 - gPXE 'Host' header being transferred without port
 Patch22: gpxe-Include-port-in-HTTP-Host-header-as-needed.patch
+# For bz#1408391 - Properly Handle 8021.Q VID 0 Frames, as new vlan model in linux kernel does.
+Patch23: gpxe-netdevice-Strip-802.1Q-VLAN-0-priority-tags.patch
+# For bz#1408390 - gPXE gets stuck if it receives fragmented IP multicast packets [rhel-6.8.z]
+Patch24: gpxe-Fix-fragment-reassembly.patch
 
 
 BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
@@ -146,6 +151,8 @@ DNS, HTTP, iSCSI, etc.
 %patch20 -p1
 %patch21 -p1
 %patch22 -p1
+%patch23 -p1
+%patch24 -p1
 cp -a %{SOURCE1} .
 
 %build
@@ -215,6 +222,14 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jan 05 2017 Yash Mankad <ymankad@redhat.com> - 0.9.7-6.15.el6_8.1
+- gpxe-netdevice-Strip-802.1Q-VLAN-0-priority-tags.patch [bz#1408391]
+- gpxe-Fix-fragment-reassembly.patch [bz#1408390]
+- Resolves: bz#1408390
+  (gPXE gets stuck if it receives fragmented IP multicast packets [rhel-6.8.z])
+- Resolves: bz#1408391
+  (Properly Handle 8021.Q VID 0 Frames, as new vlan model in linux kernel does.)
+
 * Mon Dec 07 2015 Jeff E. Nelson <jen@redhat.com> - 0.9.7-6.15.el6
 - gpxe-Include-port-in-HTTP-Host-header-as-needed.patch [bz#1231931]
 - Resolves: bz#1231931
